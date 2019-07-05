@@ -1,0 +1,7 @@
+.gitignore
+node_modules
+yarn.lock
+.prettierignore
+public/index.html
+public/favicon.ico
+/.env
