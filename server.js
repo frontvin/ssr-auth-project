@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const router = express.Router();
 
 const users = require("./routes/api/users");
 
@@ -27,6 +28,12 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
+router.get('/', (req,res) => {
+    res.send('Ok');
+});
 
 const port = process.env.PORT || 3000;
+app.get('/', function(req, res){
+    res.json("Express is working!");
+});
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
