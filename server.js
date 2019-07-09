@@ -27,7 +27,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/api/users", users);
+app.use("/", users);
 router.get('/', (req,res) => {
     res.send('Ok');
 });
