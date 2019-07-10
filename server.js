@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const router = express.Router();
+const cors = require('cors');
 
 const users = require("./routes/api/users");
 
@@ -26,13 +27,25 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
+app.use(cors());
+
+app.options('*', cors());
+
+app.all('', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    //Auth Each API Request created by user.
+    next();
+});
+
 // Routes
 app.use("/", users);
 router.get('/', (req,res) => {
     res.send('Ok');
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.get('/', function(req, res){
     res.json("Express is working!");
 });
